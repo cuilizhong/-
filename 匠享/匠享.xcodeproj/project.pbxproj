@@ -15,6 +15,8 @@
 		076AF2701D4C517900F7F125 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 076AF26E1D4C517900F7F125 /* LaunchScreen.storyboard */; };
 		076AF27B1D4C517A00F7F125 /* __Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 076AF27A1D4C517A00F7F125 /* __Tests.m */; };
 		076AF2861D4C517A00F7F125 /* __UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 076AF2851D4C517A00F7F125 /* __UITests.m */; };
+		07B5517F1D52373800F8DE6A /* NSString+FormatConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B5517E1D52373800F8DE6A /* NSString+FormatConvert.m */; };
+		07B551831D52392900F8DE6A /* Userinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B551821D52392900F8DE6A /* Userinfo.m */; };
 		ECD5F583C4D9799B7FF7A0E5 /* Pods___.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EFDFEA1362883F16D2B60BC /* Pods___.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,10 @@
 		076AF2811D4C517A00F7F125 /* 匠享UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "匠享UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		076AF2851D4C517A00F7F125 /* __UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = __UITests.m; sourceTree = "<group>"; };
 		076AF2871D4C517A00F7F125 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07B5517D1D52373800F8DE6A /* NSString+FormatConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FormatConvert.h"; path = "匠享/NSString+FormatConvert.h"; sourceTree = "<group>"; };
+		07B5517E1D52373800F8DE6A /* NSString+FormatConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FormatConvert.m"; path = "匠享/NSString+FormatConvert.m"; sourceTree = "<group>"; };
+		07B551811D52392900F8DE6A /* Userinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Userinfo.h; sourceTree = "<group>"; };
+		07B551821D52392900F8DE6A /* Userinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Userinfo.m; sourceTree = "<group>"; };
 		0EFDFEA1362883F16D2B60BC /* Pods___.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods___.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17683346A255461F6C712C47 /* Pods-匠享.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-匠享.debug.xcconfig"; path = "Pods/Target Support Files/Pods-匠享/Pods-匠享.debug.xcconfig"; sourceTree = "<group>"; };
 		D6B8E963E5B65D35F3864991 /* Pods-匠享.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-匠享.release.xcconfig"; path = "Pods/Target Support Files/Pods-匠享/Pods-匠享.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +92,8 @@
 		076AF2541D4C517900F7F125 = {
 			isa = PBXGroup;
 			children = (
+				07B551801D5238D800F8DE6A /* manger */,
+				07B5517C1D52371F00F8DE6A /* category */,
 				076AF25F1D4C517900F7F125 /* 匠享 */,
 				076AF2791D4C517A00F7F125 /* 匠享Tests */,
 				076AF2841D4C517A00F7F125 /* 匠享UITests */,
@@ -145,6 +153,24 @@
 				076AF2871D4C517A00F7F125 /* Info.plist */,
 			);
 			path = "匠享UITests";
+			sourceTree = "<group>";
+		};
+		07B5517C1D52371F00F8DE6A /* category */ = {
+			isa = PBXGroup;
+			children = (
+				07B5517D1D52373800F8DE6A /* NSString+FormatConvert.h */,
+				07B5517E1D52373800F8DE6A /* NSString+FormatConvert.m */,
+			);
+			name = category;
+			sourceTree = "<group>";
+		};
+		07B551801D5238D800F8DE6A /* manger */ = {
+			isa = PBXGroup;
+			children = (
+				07B551811D52392900F8DE6A /* Userinfo.h */,
+				07B551821D52392900F8DE6A /* Userinfo.m */,
+			);
+			name = manger;
 			sourceTree = "<group>";
 		};
 		2A8C42589E21F122F549DAD6 /* Pods */ = {
@@ -345,8 +371,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07B5517F1D52373800F8DE6A /* NSString+FormatConvert.m in Sources */,
 				076AF2681D4C517900F7F125 /* ViewController.m in Sources */,
 				076AF2651D4C517900F7F125 /* AppDelegate.m in Sources */,
+				07B551831D52392900F8DE6A /* Userinfo.m in Sources */,
 				076AF2621D4C517900F7F125 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

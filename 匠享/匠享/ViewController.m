@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "NSString+FormatConvert.h"
+#import "Userinfo.h"
+#import "EMSDK.h"
 
 #define ENABLE_DEBUG
 
@@ -26,8 +29,6 @@ static NSString *host = @"http://218.104.51.40:30003/";
  *  广场
  */
 static NSString *square = @"register/register!toSquare.shtml";
-
-static NSString *Mine = @"mine/mine!toMineIndex.shtml";
 
 
 @interface ViewController ()<UIWebViewDelegate>
@@ -99,7 +100,24 @@ static NSString *Mine = @"mine/mine!toMineIndex.shtml";
 #pragma mark-JsApiDelegate
 - (void)onJsLoginSuccess:(NSString *)parameter{
     
-    NSLog(@"parameter == %@",parameter);
+    NSDictionary *parameterDic = [NSString dictionaryWithJsonString:parameter];
+    
+    NSLog(@"parameterDic == %@",parameterDic);
+    
+    //保存数据
+    [[Userinfo sharedInstance] setValueWithDic:parameterDic];
+
+    //登陆环信
+    [[EMClient sharedClient]asyncLoginWithUsername:[Userinfo sharedInstance].hxName password:[Userinfo sharedInstance].hxPsw success:^{
+        
+        NSLog(@"环信登陆成功");
+        
+        
+        
+    } failure:^(EMError *aError) {
+        
+        
+    }];
 
 }
 
