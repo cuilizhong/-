@@ -24,4 +24,12 @@
 
 - (void)setValueWithDic:(NSDictionary *)dic;
 
+- (void)removeUserinfo;
+
+
+- (NSString *)getRememberMe;
+- (NSString *)getPassword;
+- (NSString *)getName;
+- (NSString *)getHxPsw;
+- (NSString *)getHxName;
 @end

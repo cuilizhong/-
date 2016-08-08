@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "EMSDK.h"
+#import "Userinfo.h"
 @interface AppDelegate ()
 
 @end
@@ -18,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //配置环信
-    EMOptions *options = [EMOptions optionsWithAppkey:@"douser#istore"];
+    EMOptions *options = [EMOptions optionsWithAppkey:@"chengta#yooojung"];
     options.apnsCertName = @"istore_dev";
     [[EMClient sharedClient] initializeSDKWithOptions:options];
     
@@ -51,22 +52,41 @@
     
     
     [[EMClient sharedClient] applicationDidEnterBackground:application];
+    
+    //退到后台断开连接环信
+    [[EMClient sharedClient]asyncLogout:NO success:^{
+        
+    } failure:^(EMError *aError) {
+        
+    }];
 
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
     [[EMClient sharedClient] applicationWillEnterForeground:application];
+    
+    //到前台连接环信
+    [[EMClient sharedClient]asyncLoginWithUsername:[Userinfo sharedInstance].hxName password:[Userinfo sharedInstance].hxPsw success:^{
+        
+    } failure:^(EMError *aError) {
+        
+    }];
 
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
+    self.deviceToken = deviceToken;
+    
     [[EMClient sharedClient]asyncBindDeviceToken:deviceToken success:^{
+        
+        NSLog(@"绑定成功");
         
         
     } failure:^(EMError *aError) {
         
+        NSLog(@"绑定失败，error.code = %d",aError.code);
         
     }];
 }

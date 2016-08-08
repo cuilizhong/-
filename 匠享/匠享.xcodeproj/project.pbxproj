@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		070C602E1D536D4100FC1EF1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		076AF25D1D4C517900F7F125 /* 匠享.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "匠享.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		076AF2611D4C517900F7F125 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		076AF2631D4C517900F7F125 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		076AF2541D4C517900F7F125 = {
 			isa = PBXGroup;
 			children = (
+				070C602E1D536D4100FC1EF1 /* PrefixHeader.pch */,
 				07B551801D5238D800F8DE6A /* manger */,
 				07B5517C1D52371F00F8DE6A /* category */,
 				076AF25F1D4C517900F7F125 /* 匠享 */,
@@ -260,6 +262,7 @@
 				TargetAttributes = {
 					076AF25C1D4C517900F7F125 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = VDS8F373HT;
 					};
 					076AF2751D4C517A00F7F125 = {
 						CreatedOnToolsVersion = 7.3;
@@ -519,11 +522,17 @@
 			baseConfigurationReference = 17683346A255461F6C712C47 /* Pods-匠享.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: cui_li_zhong@163.com (93L2XAW668)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = "匠享/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Softtek.--";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lizhong.test2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "67ddfb3b-2398-4e82-bbcf-7fedefe03764";
 			};
 			name = Debug;
 		};
@@ -532,11 +541,17 @@
 			baseConfigurationReference = D6B8E963E5B65D35F3864991 /* Pods-匠享.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = "匠享/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Softtek.--";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lizhong.test2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

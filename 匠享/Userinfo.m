@@ -12,7 +12,7 @@ static NSString *HXNAME = @"hxName";
 
 static NSString *HXPSW = @"hxPsw";
 
-static NSString *NAME = @"hxPsw";
+static NSString *NAME = @"name";
 
 static NSString *PASSWORD = @"password";
 
@@ -41,17 +41,21 @@ static Userinfo *userinfo = nil;
 
 - (void)setHxName:(NSString *)hxName{
     
+    NSLog(@"调用setHxName");
+
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     [userDefault setObject:hxName forKey:HXNAME];
     
-    [userDefault synchronize];
+    [userDefault synchronize];    
 }
 
 - (NSString *)getHxName{
     
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSLog(@"调用getHxName");
     
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        
     return [userDefault objectForKey:HXNAME];
 }
 
@@ -81,7 +85,7 @@ static Userinfo *userinfo = nil;
 }
 
 - (NSString *)getName{
-   
+       
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     return [userDefault objectForKey:NAME];
@@ -121,9 +125,13 @@ static Userinfo *userinfo = nil;
 
 - (void)setValueWithDic:(NSDictionary *)dic{
     
+    NSLog(@"dic = %@",dic);
+    
     if ([dic objectForKey:@"hxName"] && ![[dic objectForKey:@"hxName"] isKindOfClass:[NSNull class]]) {
         
         self.hxName = [self numberToNsstringWithObject:[dic objectForKey:@"hxName"]];
+        
+        NSLog(@"self.hxName = %@",self.hxName);
     }
     
     if ([dic objectForKey:@"hxPsw"] && ![[dic objectForKey:@"hxPsw"] isKindOfClass:[NSNull class]]) {
@@ -147,12 +155,30 @@ static Userinfo *userinfo = nil;
     }
 }
 
+- (void)removeUserinfo{
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+
+    [userDefault removeObjectForKey:HXNAME];
+    [userDefault removeObjectForKey:HXPSW];
+    [userDefault removeObjectForKey:NAME];
+    [userDefault removeObjectForKey:PASSWORD];
+    [userDefault removeObjectForKey:REMEMBERME];
+    
+    [userDefault synchronize];
+
+}
+
 
 - (NSString *)numberToNsstringWithObject:(id)object{
+    
+    NSLog(@"object = %@",object);
     
     if ([object isKindOfClass:[NSString class]]) {
         
         NSString *objectStr = (NSString *)object;
+        
+        NSLog(@"objectStr = %@",objectStr);
         
         return objectStr;
         
@@ -163,6 +189,8 @@ static Userinfo *userinfo = nil;
         return objectNum.stringValue;
         
     }else{
+        
+        NSLog(@"返回为nil");
         
         return nil;
     }

@@ -10,18 +10,7 @@
 #import "NSString+FormatConvert.h"
 #import "Userinfo.h"
 #import "EMSDK.h"
-
-#define ENABLE_DEBUG
-
-
-#ifdef ENABLE_DEBUG
-#define NSLog(format, args...) \
-NSLog(@"%s, line %d: " format "\n", \
-__func__, __LINE__, ## args);
-#else
-#define NSLog(format, args...) do {} while(0)
-#endif
-
+#import "AppDelegate.h"
 
 static NSString *host = @"http://218.104.51.40:30003/";
 
@@ -108,15 +97,47 @@ static NSString *square = @"register/register!toSquare.shtml";
     [[Userinfo sharedInstance] setValueWithDic:parameterDic];
 
     //登陆环信
-    [[EMClient sharedClient]asyncLoginWithUsername:[Userinfo sharedInstance].hxName password:[Userinfo sharedInstance].hxPsw success:^{
+    [[EMClient sharedClient]asyncLoginWithUsername:[[Userinfo sharedInstance]getHxName] password:[[Userinfo sharedInstance]getHxPsw] success:^{
         
         NSLog(@"环信登陆成功");
+        NSData *deviceToken = ((AppDelegate*)[UIApplication sharedApplication].delegate).deviceToken;
+        //绑定
+        [[EMClient sharedClient]asyncBindDeviceToken:deviceToken success:^{
+            
+            NSLog(@"绑定成功");
+            
+            //设置环信离线消息推送样式
+            [[EMClient sharedClient]asyncGetPushOptionsFromServer:^(EMPushOptions *aOptions) {
+                
+                NSLog(@"获取环信推送属性");
+                
+                aOptions.displayStyle = EMPushDisplayStyleMessageSummary;
+                
+                [[EMClient sharedClient]asyncUpdatePushOptionsToServer:^{
+                    
+                    NSLog(@"环信离线推送属性更新成功");
+                    
+                } failure:^(EMError *aError) {
+                    
+                }];
+                
+                
+            } failure:^(EMError *aError) {
+                
+            }];
+            
+            
+            
+        } failure:^(EMError *aError) {
+            
+        }];
         
         
         
     } failure:^(EMError *aError) {
         
-        
+        NSLog(@"环信登陆失败");
+
     }];
 
 }
@@ -124,12 +145,25 @@ static NSString *square = @"register/register!toSquare.shtml";
 - (void)onJsLogoutSuccess:(NSString *)parameter{
     
     NSLog(@"parameter == %@",parameter);
+    
+    [[Userinfo sharedInstance]removeUserinfo];
+    
+    [[EMClient sharedClient]asyncLogout:YES success:^{
+        
+    } failure:^(EMError *aError) {
+        
+    }];
 
 }
 
 - (void)onJsChangePwdSuccess:(NSString *)parameter{
     
-    NSLog(@"parameter == %@",parameter);
+    
+    NSDictionary *parameterDic = [NSString dictionaryWithJsonString:parameter];
+    
+    NSLog(@"parameterDic == %@",parameter);
+
+    [[Userinfo sharedInstance] setValueWithDic:parameterDic];
 
 }
 
