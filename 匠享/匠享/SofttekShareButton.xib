@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="uuj-iU-70E" customClass="SofttekShareButton">
+            <rect key="frame" x="0.0" y="0.0" width="96" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LcX-95-NWN">
+                    <rect key="frame" x="0.0" y="14" width="96" height="72"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4O-JI-Uud">
+                            <rect key="frame" x="23" y="0.0" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="DYz-Nc-c7p"/>
+                                <constraint firstAttribute="height" constant="50" id="lSy-GU-BFv"/>
+                            </constraints>
+                            <state key="normal" image="wxlogo"/>
+                            <connections>
+                                <action selector="shareButtonAction:" destination="uuj-iU-70E" eventType="touchUpInside" id="eWl-Zh-Ybz"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信好友" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yP-BE-IZe">
+                            <rect key="frame" x="0.0" y="58" width="96" height="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.62352941176470589" green="0.60784313725490191" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="8yP-BE-IZe" firstAttribute="top" secondItem="N4O-JI-Uud" secondAttribute="bottom" constant="8" id="4iA-d5-FAY"/>
+                        <constraint firstAttribute="height" constant="72" id="IgF-cc-t7l"/>
+                        <constraint firstAttribute="trailing" secondItem="8yP-BE-IZe" secondAttribute="trailing" id="JgH-uK-tUu"/>
+                        <constraint firstItem="N4O-JI-Uud" firstAttribute="top" secondItem="LcX-95-NWN" secondAttribute="top" id="lvS-YS-eNR"/>
+                        <constraint firstItem="8yP-BE-IZe" firstAttribute="leading" secondItem="LcX-95-NWN" secondAttribute="leading" id="pKz-aa-FQz"/>
+                        <constraint firstAttribute="bottom" secondItem="8yP-BE-IZe" secondAttribute="bottom" id="qX1-sz-3B4"/>
+                        <constraint firstItem="N4O-JI-Uud" firstAttribute="centerX" secondItem="LcX-95-NWN" secondAttribute="centerX" id="qgQ-Ds-po7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="LcX-95-NWN" secondAttribute="trailing" id="NXL-7m-Bqf"/>
+                <constraint firstItem="LcX-95-NWN" firstAttribute="centerY" secondItem="uuj-iU-70E" secondAttribute="centerY" id="lNe-cJ-BZr"/>
+                <constraint firstItem="LcX-95-NWN" firstAttribute="leading" secondItem="uuj-iU-70E" secondAttribute="leading" id="vZf-0l-IMT"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="shareButton" destination="N4O-JI-Uud" id="j8T-rk-y69"/>
+                <outlet property="sharePlatformLabel" destination="8yP-BE-IZe" id="pCZ-Tm-8zs"/>
+            </connections>
+            <point key="canvasLocation" x="437" y="282"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="wxlogo" width="43" height="43"/>
+    </resources>
+</document>

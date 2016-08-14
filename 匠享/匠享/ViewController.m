@@ -12,6 +12,7 @@
 #import "EMSDK.h"
 #import "AppDelegate.h"
 #import "UMSocial.h"
+#import "SofttekShareView.h"
 
 
 static NSString *host = @"http://218.104.51.40:30003/";
@@ -187,17 +188,35 @@ static NSString *square = @"register/register!toSquare.shtml";
     
     NSLog(@"parameterDic == %@",parameterDic);
     
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
     
+    //弹出分享菜单
+    NSArray *platformsArray = @[@"微信",@"朋友圈",@"微博",@"QQ",@"QQ空间",@"复制链接"];
     
-    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:@"http://www.baidu.com/img/bdlogo.gif"];
-    [UMSocialData defaultData].extConfig.title = parameterDic[@""];
-    [UMSocialData defaultData].extConfig.qqData.url = @"http://baidu.com";
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:@"507fcab25270157b37000010"
-                                      shareText:@"友盟社会化分享让您快速实现分享等社会化功能，http://umeng.com/social"
-                                     shareImage:[UIImage imageNamed:@"icon"]
-                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToQzone]
-                                       delegate:self];
+    __weak typeof(self)weakSelf = self;
+    
+    SofttekShareView *shareView = [[SofttekShareView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) sharePlatformsArray:platformsArray shareBlock:^(NSInteger index) {
+       
+        NSLog(@"index = %ld",(long)index);
+        
+        [weakSelf shareActionWithIndex:index parameter:parameterDic];
+        
+    }];
+        
+    [window addSubview:shareView];
+    
+    [shareView showBottom];
+
+    
+//    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:@"http://www.baidu.com/img/bdlogo.gif"];
+//    [UMSocialData defaultData].extConfig.title = parameterDic[@""];
+//    [UMSocialData defaultData].extConfig.qqData.url = @"http://baidu.com";
+//    [UMSocialSnsService presentSnsIconSheetView:self
+//                                         appKey:@"507fcab25270157b37000010"
+//                                      shareText:@"友盟社会化分享让您快速实现分享等社会化功能，http://umeng.com/social"
+//                                     shareImage:[UIImage imageNamed:@"icon"]
+//                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToQzone]
+//                                       delegate:self];
     
     
     /*
@@ -208,6 +227,109 @@ static NSString *square = @"register/register!toSquare.shtml";
      title = "\U5320\U4eab\U5546\U57ce\U7b49\U4f60\U6765\U8d2d";
      }
      */
+}
+
+
+- (void)shareActionWithIndex:(NSInteger)index parameter:(NSDictionary *)parameter{
+    
+    NSString *detail = parameter[@"detail"];
+    
+    NSString *href = parameter[@"href"];
+    
+    NSString *imageSrc = parameter[@"imageSrc"];
+    
+//    NSString *title = parameter[@"title"];
+    
+    UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeWeb url:href];
+    
+    NSArray *platformTypes;
+    
+    switch (index) {
+            
+        case 0:{
+            
+            platformTypes = @[UMShareToWechatSession];
+            
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = href;
+            
+        }
+            break;
+            
+        case 1:{
+            
+            platformTypes = @[UMShareToWechatTimeline];
+            
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = href;
+            
+        }
+            break;
+            
+        case 2:{
+            
+            platformTypes = @[UMShareToSina];
+            
+            [UMSocialData defaultData].extConfig.sinaData.urlResource = urlResource;
+            
+        }
+            break;
+            
+        case 3:{
+            
+            platformTypes = @[UMShareToQQ];
+            
+            [UMSocialData defaultData].extConfig.qqData.url = href;
+            
+        }
+            break;
+            
+        case 4:{
+            
+            platformTypes = @[UMShareToQzone];
+            
+            [UMSocialData defaultData].extConfig.qzoneData.url = href;
+            
+        }
+            break;
+            
+        case 5:{
+        
+            //复制链接
+            
+            NSLog(@"复制链接");
+            UIPasteboard *pab = [UIPasteboard generalPasteboard];
+            
+            [pab setString:href];
+            
+            if (pab == nil) {
+                
+                NSLog(@"复制失败");
+                
+            }else{
+                NSLog(@"复制成功");
+
+            }
+            
+            return;
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:platformTypes content:detail image:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageSrc]] location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            NSLog(@"分享成功！");
+            
+        }else{
+            
+            NSLog(@"分享失败,errorCode：%u",response.responseCode);
+        }
+        
+    }];    
 }
 
 -(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response

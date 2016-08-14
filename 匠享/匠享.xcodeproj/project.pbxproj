@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		075CDD9A1D60029800FE6D22 /* SofttekShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 075CDD961D60029800FE6D22 /* SofttekShareButton.m */; };
+		075CDD9B1D60029800FE6D22 /* SofttekShareButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075CDD971D60029800FE6D22 /* SofttekShareButton.xib */; };
+		075CDD9C1D60029800FE6D22 /* SofttekShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 075CDD991D60029800FE6D22 /* SofttekShareView.m */; };
 		076AF2621D4C517900F7F125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 076AF2611D4C517900F7F125 /* main.m */; };
 		076AF2651D4C517900F7F125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 076AF2641D4C517900F7F125 /* AppDelegate.m */; };
 		076AF2681D4C517900F7F125 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 076AF2671D4C517900F7F125 /* ViewController.m */; };
@@ -39,6 +42,11 @@
 
 /* Begin PBXFileReference section */
 		070C602E1D536D4100FC1EF1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		075CDD951D60029800FE6D22 /* SofttekShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofttekShareButton.h; sourceTree = "<group>"; };
+		075CDD961D60029800FE6D22 /* SofttekShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofttekShareButton.m; sourceTree = "<group>"; };
+		075CDD971D60029800FE6D22 /* SofttekShareButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SofttekShareButton.xib; sourceTree = "<group>"; };
+		075CDD981D60029800FE6D22 /* SofttekShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofttekShareView.h; sourceTree = "<group>"; };
+		075CDD991D60029800FE6D22 /* SofttekShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofttekShareView.m; sourceTree = "<group>"; };
 		076AF25D1D4C517900F7F125 /* 匠享.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "匠享.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		076AF2611D4C517900F7F125 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		076AF2631D4C517900F7F125 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -118,6 +126,11 @@
 		076AF25F1D4C517900F7F125 /* 匠享 */ = {
 			isa = PBXGroup;
 			children = (
+				075CDD951D60029800FE6D22 /* SofttekShareButton.h */,
+				075CDD961D60029800FE6D22 /* SofttekShareButton.m */,
+				075CDD971D60029800FE6D22 /* SofttekShareButton.xib */,
+				075CDD981D60029800FE6D22 /* SofttekShareView.h */,
+				075CDD991D60029800FE6D22 /* SofttekShareView.m */,
 				076AF2631D4C517900F7F125 /* AppDelegate.h */,
 				076AF2641D4C517900F7F125 /* AppDelegate.m */,
 				076AF2661D4C517900F7F125 /* ViewController.h */,
@@ -300,6 +313,7 @@
 			files = (
 				076AF2701D4C517900F7F125 /* LaunchScreen.storyboard in Resources */,
 				076AF26D1D4C517900F7F125 /* Assets.xcassets in Resources */,
+				075CDD9B1D60029800FE6D22 /* SofttekShareButton.xib in Resources */,
 				076AF26B1D4C517900F7F125 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,7 +388,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				07B5517F1D52373800F8DE6A /* NSString+FormatConvert.m in Sources */,
+				075CDD9C1D60029800FE6D22 /* SofttekShareView.m in Sources */,
 				076AF2681D4C517900F7F125 /* ViewController.m in Sources */,
+				075CDD9A1D60029800FE6D22 /* SofttekShareButton.m in Sources */,
 				076AF2651D4C517900F7F125 /* AppDelegate.m in Sources */,
 				07B551831D52392900F8DE6A /* Userinfo.m in Sources */,
 				076AF2621D4C517900F7F125 /* main.m in Sources */,
