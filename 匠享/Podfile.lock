@@ -1,8 +1,10 @@
 PODS:
   - HyphenateFullSDK (3.1.4)
+  - UMengSocialCOM (5.2.1)
 
 DEPENDENCIES:
   - HyphenateFullSDK (from `https://github.com/easemob/hyphenate-full-cocoapods.git`)
+  - UMengSocialCOM (~> 5.2.1)
 
 EXTERNAL SOURCES:
   HyphenateFullSDK:
@@ -15,7 +17,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   HyphenateFullSDK: 0640f9710da83da7a08928f074da718ed3368277
+  UMengSocialCOM: 074c135ce349aa4c8848d3fb8458757bcb6ffb67
 
-PODFILE CHECKSUM: 9564ee78e884ffad0ca16ed2c0ba262783c42b8a
+PODFILE CHECKSUM: eb73fa007da54585c99f4de4b23a5f3082535d4b
 
 COCOAPODS: 1.0.1

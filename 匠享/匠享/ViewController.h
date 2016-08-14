@@ -17,6 +17,9 @@
 
 - (void)onJsChangePwdSuccess:(NSString *)parameter;
 
+- (void)onJsOnShare:(NSString *)parameter;
+
+
 @end
 
 @interface ViewController : UIViewController<JsApiDelegate>

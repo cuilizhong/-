@@ -11,6 +11,8 @@
 #import "Userinfo.h"
 #import "EMSDK.h"
 #import "AppDelegate.h"
+#import "UMSocial.h"
+
 
 static NSString *host = @"http://218.104.51.40:30003/";
 
@@ -20,7 +22,7 @@ static NSString *host = @"http://218.104.51.40:30003/";
 static NSString *square = @"register/register!toSquare.shtml";
 
 
-@interface ViewController ()<UIWebViewDelegate>
+@interface ViewController ()<UIWebViewDelegate,UMSocialUIDelegate>
 
 @property(nonatomic,strong)UIWebView *webView;
 
@@ -61,6 +63,18 @@ static NSString *square = @"register/register!toSquare.shtml";
 -(void)webView:(UIWebView*)webView DidFailLoadWithError:(NSError*)error{
     
     NSLog(@"error == %@",error);
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请检查您的网络连接" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertController addAction:alertAction];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
 }
 
 
@@ -161,10 +175,49 @@ static NSString *square = @"register/register!toSquare.shtml";
     
     NSDictionary *parameterDic = [NSString dictionaryWithJsonString:parameter];
     
-    NSLog(@"parameterDic == %@",parameter);
+    NSLog(@"parameterDic == %@",parameterDic);
 
     [[Userinfo sharedInstance] setValueWithDic:parameterDic];
 
+}
+
+- (void)onJsOnShare:(NSString *)parameter{
+    
+    NSDictionary *parameterDic = [NSString dictionaryWithJsonString:parameter];
+    
+    NSLog(@"parameterDic == %@",parameterDic);
+    
+    
+    
+    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:@"http://www.baidu.com/img/bdlogo.gif"];
+    [UMSocialData defaultData].extConfig.title = parameterDic[@""];
+    [UMSocialData defaultData].extConfig.qqData.url = @"http://baidu.com";
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"507fcab25270157b37000010"
+                                      shareText:@"友盟社会化分享让您快速实现分享等社会化功能，http://umeng.com/social"
+                                     shareImage:[UIImage imageNamed:@"icon"]
+                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToQzone]
+                                       delegate:self];
+    
+    
+    /*
+     parameterDic == {
+     detail = "\U5320\U4eab\U5546\U57ce\U6bcf\U65e5\U66f4\U65b0\Uff0c\U603b\U6709\U4f60\U8981\U7684\U60ca\U559c";
+     href = "http://218.104.51.40:30003/worktable/sale!order.shtml";
+     imageSrc = "http://218.104.51.40:30003/superTrader/images/b3.jpg";
+     title = "\U5320\U4eab\U5546\U57ce\U7b49\U4f60\U6765\U8d2d";
+     }
+     */
+}
+
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
 }
 
 - (void)didReceiveMemoryWarning {

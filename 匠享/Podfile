@@ -4,6 +4,7 @@ use_frameworks!
 
 target '匠享' do
     pod 'HyphenateFullSDK', :git => 'https://github.com/easemob/hyphenate-full-cocoapods.git'
-    
+
+    pod 'UMengSocialCOM', '~> 5.2.1'
 
 end
