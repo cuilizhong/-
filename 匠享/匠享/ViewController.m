@@ -49,6 +49,13 @@ static NSString *square = @"register/register!toSquare.shtml";
     [self.webView loadRequest:request];
     [self.webView scalesPageToFit];
     [self.view addSubview:self.webView];
+    
+    
+    //加背景图片
+    self.webView.backgroundColor = [UIColor clearColor];
+    self.webView.opaque = NO;
+    [self.webView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"share_复制链接"]]];
+
 }
 
 #pragma mark-UIWebViewDelegate

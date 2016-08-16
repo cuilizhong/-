@@ -25,7 +25,7 @@
     
     //配置环信
     EMOptions *options = [EMOptions optionsWithAppkey:@"chengta#yooojung"];
-    options.apnsCertName = @"dis_push";
+    options.apnsCertName = @"dev_push";
     [[EMClient sharedClient] initializeSDKWithOptions:options];
     
     //注册推送
@@ -100,7 +100,13 @@
     [[EMClient sharedClient] applicationWillEnterForeground:application];
     
     //到前台连接环信
-    [[EMClient sharedClient]asyncLoginWithUsername:[Userinfo sharedInstance].hxName password:[Userinfo sharedInstance].hxPsw success:^{
+    NSString *hxName = [[Userinfo sharedInstance]getHxName];
+    NSString *hxPsw = [[Userinfo sharedInstance]getHxPsw];
+    
+    NSLog(@"hxName = %@",hxName);
+    NSLog(@"hxPaw = %@",hxPsw);
+    
+    [[EMClient sharedClient]asyncLoginWithUsername:hxName password:hxPsw success:^{
         
         NSLog(@"登陆成功");
         
