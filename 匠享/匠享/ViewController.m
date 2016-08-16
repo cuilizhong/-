@@ -238,9 +238,9 @@ static NSString *square = @"register/register!toSquare.shtml";
     
     NSString *imageSrc = parameter[@"imageSrc"];
     
-//    NSString *title = parameter[@"title"];
+    NSString *title = parameter[@"title"];
     
-    UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeWeb url:href];
+    UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:href];
     
     NSArray *platformTypes;
     
@@ -251,6 +251,8 @@ static NSString *square = @"register/register!toSquare.shtml";
             platformTypes = @[UMShareToWechatSession];
             
             [UMSocialData defaultData].extConfig.wechatSessionData.url = href;
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+
             
         }
             break;
@@ -260,6 +262,7 @@ static NSString *square = @"register/register!toSquare.shtml";
             platformTypes = @[UMShareToWechatTimeline];
             
             [UMSocialData defaultData].extConfig.wechatTimelineData.url = href;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
             
         }
             break;
@@ -278,6 +281,13 @@ static NSString *square = @"register/register!toSquare.shtml";
             platformTypes = @[UMShareToQQ];
             
             [UMSocialData defaultData].extConfig.qqData.url = href;
+            [UMSocialData defaultData].extConfig.qqData.title = title;
+            
+            
+            NSLog(@"href = %@",href);
+
+
+            
             
         }
             break;
@@ -287,7 +297,8 @@ static NSString *square = @"register/register!toSquare.shtml";
             platformTypes = @[UMShareToQzone];
             
             [UMSocialData defaultData].extConfig.qzoneData.url = href;
-            
+            [UMSocialData defaultData].extConfig.qzoneData.title = title;
+
         }
             break;
             
@@ -318,6 +329,8 @@ static NSString *square = @"register/register!toSquare.shtml";
             break;
     }
     
+    
+    NSLog(@"detail = %@",detail);
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:platformTypes content:detail image:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageSrc]] location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
         
         if (response.responseCode == UMSResponseCodeSuccess) {
