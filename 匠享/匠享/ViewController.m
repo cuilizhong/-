@@ -52,9 +52,9 @@ static NSString *square = @"register/register!toSquare.shtml";
     
     
     //加背景图片
-    self.webView.backgroundColor = [UIColor clearColor];
-    self.webView.opaque = NO;
-    [self.webView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"share_复制链接"]]];
+//    self.webView.backgroundColor = [UIColor clearColor];
+//    self.webView.opaque = NO;
+//    [self.webView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"share_复制链接"]]];
 
 }
 
@@ -278,7 +278,7 @@ static NSString *square = @"register/register!toSquare.shtml";
             
             platformTypes = @[UMShareToSina];
             
-            [UMSocialData defaultData].extConfig.sinaData.urlResource = urlResource;
+            detail = [NSString stringWithFormat:@"%@%@",detail,href];
             
         }
             break;
@@ -289,12 +289,6 @@ static NSString *square = @"register/register!toSquare.shtml";
             
             [UMSocialData defaultData].extConfig.qqData.url = href;
             [UMSocialData defaultData].extConfig.qqData.title = title;
-            
-            
-            NSLog(@"href = %@",href);
-
-
-            
             
         }
             break;

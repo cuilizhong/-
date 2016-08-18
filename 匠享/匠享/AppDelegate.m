@@ -55,8 +55,8 @@
     [UMSocialQQHandler setQQWithAppId:@"1105538923" appKey:@"8FCMcGBQ9lYpSTDW" url:@"http://www.umeng.com/social"];
     
     //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。
-    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3921700954"
-                                              secret:@"04b48b094faeb16683c32669824ebdad"
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"921710970"
+                                              secret:@"97643dc102e8f9ab7830d2f8c5a29560"
                                          RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
 
     
