@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073F5EF81D65ACC1008A925C /* NetWorkJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 073F5EF51D65ACC1008A925C /* NetWorkJudge.m */; };
+		073F5EF91D65ACC1008A925C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 073F5EF71D65ACC1008A925C /* Reachability.m */; };
 		075CDD9A1D60029800FE6D22 /* SofttekShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 075CDD961D60029800FE6D22 /* SofttekShareButton.m */; };
 		075CDD9B1D60029800FE6D22 /* SofttekShareButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075CDD971D60029800FE6D22 /* SofttekShareButton.xib */; };
 		075CDD9C1D60029800FE6D22 /* SofttekShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 075CDD991D60029800FE6D22 /* SofttekShareView.m */; };
@@ -42,6 +44,10 @@
 
 /* Begin PBXFileReference section */
 		070C602E1D536D4100FC1EF1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		073F5EF41D65ACC1008A925C /* NetWorkJudge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkJudge.h; sourceTree = "<group>"; };
+		073F5EF51D65ACC1008A925C /* NetWorkJudge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkJudge.m; sourceTree = "<group>"; };
+		073F5EF61D65ACC1008A925C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		073F5EF71D65ACC1008A925C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		075CDD951D60029800FE6D22 /* SofttekShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofttekShareButton.h; sourceTree = "<group>"; };
 		075CDD961D60029800FE6D22 /* SofttekShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofttekShareButton.m; sourceTree = "<group>"; };
 		075CDD971D60029800FE6D22 /* SofttekShareButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SofttekShareButton.xib; sourceTree = "<group>"; };
@@ -98,9 +104,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		073F5EF31D65ACC1008A925C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				073F5EF41D65ACC1008A925C /* NetWorkJudge.h */,
+				073F5EF51D65ACC1008A925C /* NetWorkJudge.m */,
+				073F5EF61D65ACC1008A925C /* Reachability.h */,
+				073F5EF71D65ACC1008A925C /* Reachability.m */,
+			);
+			name = Reachability;
+			path = "匠享/Reachability";
+			sourceTree = "<group>";
+		};
 		076AF2541D4C517900F7F125 = {
 			isa = PBXGroup;
 			children = (
+				073F5EF31D65ACC1008A925C /* Reachability */,
 				070C602E1D536D4100FC1EF1 /* PrefixHeader.pch */,
 				07B551801D5238D800F8DE6A /* manger */,
 				07B5517C1D52371F00F8DE6A /* category */,
@@ -389,10 +408,12 @@
 			files = (
 				07B5517F1D52373800F8DE6A /* NSString+FormatConvert.m in Sources */,
 				075CDD9C1D60029800FE6D22 /* SofttekShareView.m in Sources */,
+				073F5EF81D65ACC1008A925C /* NetWorkJudge.m in Sources */,
 				076AF2681D4C517900F7F125 /* ViewController.m in Sources */,
 				075CDD9A1D60029800FE6D22 /* SofttekShareButton.m in Sources */,
 				076AF2651D4C517900F7F125 /* AppDelegate.m in Sources */,
 				07B551831D52392900F8DE6A /* Userinfo.m in Sources */,
+				073F5EF91D65ACC1008A925C /* Reachability.m in Sources */,
 				076AF2621D4C517900F7F125 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

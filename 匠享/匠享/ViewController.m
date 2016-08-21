@@ -13,21 +13,24 @@
 #import "AppDelegate.h"
 #import "UMSocial.h"
 #import "SofttekShareView.h"
+#import "NetWorkJudge.h"
 
 
-static NSString *host = @"http://218.104.51.40:30003/";
+static NSString *host = @"http://www.yooojung.com/";
 
 /**
  *  广场
  */
-static NSString *square = @"register/register!toSquare.shtml";
+static NSString *square = @"squareIndex.jsp";
 
 
 @interface ViewController ()<UIWebViewDelegate,UMSocialUIDelegate>
 
 @property(nonatomic,strong)UIWebView *webView;
 
+@property(nonatomic,strong)UIImageView *tipNoNetworkImageView;
 
+@property(nonatomic,strong)UIActivityIndicatorView *activityView;
 
 @end
 
@@ -43,20 +46,51 @@ static NSString *square = @"register/register!toSquare.shtml";
     NSString *urlstr = [NSString stringWithFormat:@"%@%@",host,square];
     
     NSLog(@"urlstr = %@", urlstr);
+        
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlstr]
+                             
+                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+                             
+                                              timeoutInterval:60];
     
-    NSURL *url = [NSURL URLWithString:urlstr];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
     [self.webView scalesPageToFit];
     [self.view addSubview:self.webView];
     
     
-    //加背景图片
-//    self.webView.backgroundColor = [UIColor clearColor];
-//    self.webView.opaque = NO;
-//    [self.webView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"share_复制链接"]]];
-
+    
+    
+    self.tipNoNetworkImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    
+    self.tipNoNetworkImageView.image = [UIImage imageNamed:@"nonetwork"];
+    
+    self.tipNoNetworkImageView.userInteractionEnabled = YES;
+    
+    [self.view addSubview:self.tipNoNetworkImageView];
+    
+    self.tipNoNetworkImageView.hidden = YES;
+    
+    
+    UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+    
+    [singleTapGestureRecognizer setNumberOfTapsRequired:1];
+    
+    [self.tipNoNetworkImageView addGestureRecognizer:singleTapGestureRecognizer];
+    
+    
+    
+    self.activityView = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+    self.activityView.center = self.view.center;
+    self.activityView.color = [UIColor blackColor];
+    
+    [self.view addSubview:self.activityView];
 }
+
+- (void)singleTap:(UITapGestureRecognizer *)sender{
+    
+    [self.webView reload];
+}
+
 
 #pragma mark-UIWebViewDelegate
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -66,27 +100,35 @@ static NSString *square = @"register/register!toSquare.shtml";
 
 - (void)webViewDidStartLoad:(UIWebView*)webView{
     
+    [self.activityView startAnimating];
+    
+    self.tipNoNetworkImageView.hidden = YES;
+    
+    
+    if (![[NetWorkJudge sharedInstance]isConnecNetWork]) {
+        
+        [self.activityView stopAnimating];
+        
+        self.tipNoNetworkImageView.hidden = NO;
+        
+    }
+    
 }
 
 -(void)webView:(UIWebView*)webView DidFailLoadWithError:(NSError*)error{
     
+    [self.activityView stopAnimating];
+
+    
     NSLog(@"error == %@",error);
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请检查您的网络连接" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    
-    [alertController addAction:alertAction];
-    
-    [self presentViewController:alertController animated:YES completion:^{
-        
-    }];
 }
 
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
+    
+    [self.activityView stopAnimating];
+    self.tipNoNetworkImageView.hidden = YES;
     
     if (self.context) {
         
@@ -213,27 +255,6 @@ static NSString *square = @"register/register!toSquare.shtml";
     [window addSubview:shareView];
     
     [shareView showBottom];
-
-    
-//    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:@"http://www.baidu.com/img/bdlogo.gif"];
-//    [UMSocialData defaultData].extConfig.title = parameterDic[@""];
-//    [UMSocialData defaultData].extConfig.qqData.url = @"http://baidu.com";
-//    [UMSocialSnsService presentSnsIconSheetView:self
-//                                         appKey:@"507fcab25270157b37000010"
-//                                      shareText:@"友盟社会化分享让您快速实现分享等社会化功能，http://umeng.com/social"
-//                                     shareImage:[UIImage imageNamed:@"icon"]
-//                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToQzone]
-//                                       delegate:self];
-    
-    
-    /*
-     parameterDic == {
-     detail = "\U5320\U4eab\U5546\U57ce\U6bcf\U65e5\U66f4\U65b0\Uff0c\U603b\U6709\U4f60\U8981\U7684\U60ca\U559c";
-     href = "http://218.104.51.40:30003/worktable/sale!order.shtml";
-     imageSrc = "http://218.104.51.40:30003/superTrader/images/b3.jpg";
-     title = "\U5320\U4eab\U5546\U57ce\U7b49\U4f60\U6765\U8d2d";
-     }
-     */
 }
 
 
