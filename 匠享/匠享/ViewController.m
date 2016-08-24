@@ -32,6 +32,8 @@ static NSString *square = @"squareIndex.jsp";
 
 @property(nonatomic,strong)UIActivityIndicatorView *activityView;
 
+@property(nonatomic,strong)UIScrollView *scrollView;
+
 @end
 
 @implementation ViewController
@@ -84,6 +86,70 @@ static NSString *square = @"squareIndex.jsp";
     self.activityView.color = [UIColor blackColor];
     
     [self.view addSubview:self.activityView];
+    
+    //
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([[userDefaults objectForKey:@"isLaunched"] isEqualToString:@"1"]) {
+        
+        //不显示
+        
+    }else{
+        
+        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        self.scrollView.pagingEnabled = YES;
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width*5, self.view.frame.size.height);
+        
+        for (int i = 0; i<5; i++) {
+            
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height)];
+            
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"image_%d",i+1]];
+            
+            if (i == 4) {
+                
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                
+                CALayer * layer = [button layer];
+                layer.borderColor = [[UIColor blackColor] CGColor];
+                layer.borderWidth = 0.5f;
+                
+                button.frame = CGRectMake(50, self.view.frame.size.height - 80, self.view.frame.size.width - 100, 50);
+                [button setTitle:@"立即体验" forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [button addTarget:self action:@selector(entrySystem:) forControlEvents:UIControlEventTouchUpInside];
+                [imageView addSubview:button];
+                imageView.userInteractionEnabled = YES;
+                
+            }
+            
+            [self.scrollView addSubview:imageView];
+        }
+        
+        
+        [self.view addSubview:self.scrollView];
+        
+    }
+    
+    
+}
+
+- (void)entrySystem:(UIButton *)sender{
+    
+    self.scrollView.hidden = YES;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+    [userDefaults setObject:@"1" forKey:@"isLaunched"];
+    
+    [userDefaults synchronize];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    
 }
 
 - (void)singleTap:(UITapGestureRecognizer *)sender{
