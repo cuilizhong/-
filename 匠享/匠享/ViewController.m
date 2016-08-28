@@ -34,12 +34,19 @@ static NSString *square = @"squareIndex.jsp";
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 
+@property(nonatomic,assign)BOOL isFirstRequest;
+
+@property(nonatomic,assign)BOOL isShared;
+
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.isFirstRequest = YES;
     
     self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     
@@ -154,12 +161,34 @@ static NSString *square = @"squareIndex.jsp";
 
 - (void)singleTap:(UITapGestureRecognizer *)sender{
     
-    [self.webView reload];
+    if (self.isFirstRequest) {
+        
+        
+        NSString *urlstr = [NSString stringWithFormat:@"%@%@",host,square];
+        
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlstr]
+                                 
+                                                      cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                 
+                                                  timeoutInterval:60];
+        
+        [self.webView loadRequest:request];
+
+        
+        self.isFirstRequest = NO;
+        
+    }else{
+        [self.webView reload];
+
+    }
+    
 }
 
 
 #pragma mark-UIWebViewDelegate
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    
+    
     
     return YES;
 }
@@ -299,6 +328,12 @@ static NSString *square = @"squareIndex.jsp";
 
 - (void)onJsOnShare:(NSString *)parameter{
     
+    if (self.isShared) {
+        return;
+    }
+    
+    self.isShared = YES;
+    
     NSDictionary *parameterDic = [NSString dictionaryWithJsonString:parameter];
     
     NSLog(@"parameterDic == %@",parameterDic);
@@ -311,6 +346,7 @@ static NSString *square = @"squareIndex.jsp";
     __weak typeof(self)weakSelf = self;
     
     SofttekShareView *shareView = [[SofttekShareView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) sharePlatformsArray:platformsArray shareBlock:^(NSInteger index) {
+        
        
         NSLog(@"index = %ld",(long)index);
         
@@ -321,6 +357,8 @@ static NSString *square = @"squareIndex.jsp";
     [window addSubview:shareView];
     
     [shareView showBottom];
+    
+    self.isShared = NO;
 }
 
 
